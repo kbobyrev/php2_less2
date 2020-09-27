@@ -1,26 +1,15 @@
 <?php
-include_once "Product.php";
-
-/**
- штучный продукт
- */
-class RealProduct extends Product
-{
+include_once "DigitProduct.php";
+class RealProduct extends DigitProduct{
 	
-	function __construct($price){
-		$this->price =$price;
+	public function getPrice(){
+		return parent::PRICE /2;
 	}
-	//финальная стоимость = стоимость
-	public function finalPriceCount(){
-		return $this->price;
-	}
-	//факт продажи
-	public function addSale($sale){
-		$this->saleCount=$sale;
-		$fRprice =(int)($this->finalPriceCount());
-		$this->proceeds =+ ($fRprice*$sale);
-	}
+
+	
 
 }
+
+
 
 ?>

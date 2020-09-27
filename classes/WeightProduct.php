@@ -1,31 +1,35 @@
 <?php
-include_once  "RealProduct.php";
+include_once  "DigitProduct.php";
 
-/**
+/*
  весосовой продукт
  */
-class WeightProduct extends RealProduct
-{
-	public $kilo=25;
+class WeightProduct extends DigitProduct{
+	public $kilo=0;
 
 	function __construct($price){
-		parent::__construct($price);
+		$this->price=$price;
 	}
+
+
 	//финальная стоимость = стоимость
 	public function finalPriceCount(){
-		if ($this->kilo>100){
-			return $this->price * 0.8; //20% discount
-		}elseif ($this->kilo>50){
-			return $this->price * 0.9; //10% discount
+		return $this->price;
+	}
+
+	private function discountCount($sale){
+		if ($sale>100){
+			return 0.8; //20% discount
+		}elseif ($sale>50){
+			return 0.9; //10% discount
 		}else{
-			return $this->price;//no discount
+			return 1;//no discount
 		}
 	}
 	//факт продажи
-	function addSale($sale){
+	function addSale(float $sale){
 		$this->saleCount=+$sale;
-		$this->kilo=$sale;
-		$this->proceeds =+ (int)($this->finalPriceCount());
+		$this->$proceeds=+(int)($this->finalPriceCount())*$this->discountCount($sale)*$sale;
 	}
 
 }
